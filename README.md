@@ -29,7 +29,9 @@
 - pymodbus == 2.5.2
 
 
-
+#### Weights file
+https://github.com/KavenLee/danger_object_detect/releases/tag/yolomodel
+- Move the downloaded file to the path in "python/".
 
 
 
