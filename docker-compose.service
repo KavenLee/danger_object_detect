@@ -1,0 +1,22 @@
+[Unit]
+Description=Docker Compose Application Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+User=cctv
+Group=docker
+Environment="OPENBLAS_CORETYPE=ARMV8"
+WorkingDirectory=/home/cctv/dev/server/
+ExecStart=/usr/local/bin/docker-compose up -d 
+#ExecStart=/bin/bash /home/cctv/dev/server/docker-start.sh
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+Restart=on-failure
+RestartSec=2s
+
+
+[Install]
+WantedBy=multi-user.target

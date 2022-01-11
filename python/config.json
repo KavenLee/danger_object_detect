@@ -1,0 +1,12 @@
+{
+	"CctvIpAddr": "192.168.1.100",
+	"CctvPortNo": 80,
+	"CctvID": "carpos",
+	"CctvPassword": "carpos1910",
+	"ModbusPortNo": 502,
+	"Left": 0,
+	"Top": 100,
+	"Right": 1148,
+	"Bottom": 850,
+	"Reboot": 0
+}

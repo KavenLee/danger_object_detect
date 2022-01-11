@@ -1,0 +1,17 @@
+[Unit]
+Description=Python Daemon
+Requires=network.target
+After=docker-compose.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+Environment="OPENBLAS_CORETYPE=ARMV8"
+ExecStart=/usr/bin/python3 /home/cctv/dev/python/server.py
+Restart=on-failure 
+RestartSec=2s
+TimeoutStartSec=0
+
+[Install]
+WantedBy=graphical.target

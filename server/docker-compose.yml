@@ -1,0 +1,31 @@
+version: '3.9'
+
+networks:
+    laravel:
+
+services:
+    nginx:
+        image: nginx:stable-alpine
+        container_name: nginx
+        ports:
+            - "8088:80"
+        volumes:
+            - ./html:/var/www/html # get_image.php 경로
+            - ./default.conf:/etc/nginx/conf.d/default.conf
+            - /home/leekg/dev/python/file:/var/www/html/file # json 파일 폴더경로
+        depends_on:
+            - php
+        networks:
+            - laravel
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: php
+        volumes:
+            - ./html:/var/www/html # get_image.php 경로
+            - /home/leekg/dev/python/file:/var/www/html/file # json 파일 폴더경로
+        ports:
+            - "9000:9000"
+        networks:
+            - laravel
