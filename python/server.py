@@ -9,6 +9,7 @@ from time import sleep,time
 from config import Config
 from twisted.internet import reactor
 from queue import Queue
+import cv2
 
 
 # Holding Register, Input Register Address
@@ -408,7 +409,8 @@ def main():
 
     # 첫 실행시 시간이 소요되어 미리 한번 실행.
     process.net_ready()
-    process.main('/home/cctv/dev/python/t.png')
+    src=cv2.imread('/home/cctv/dev/python/t.png',cv2.IMREAD_COLOR)
+    process.main(src)
     #process.main(imgQueue.get())
     
     # cctv 작동중인 것을 나타내기 위한 신호를 주기위한 Thread.
