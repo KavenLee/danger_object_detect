@@ -143,8 +143,9 @@ def net_ready():
         
         print('Darknet Ready Success.')
 
-    except:
+    except Exception as e:
         print("Darknet Ready Failed...")
+        print(e)
     
         
 
@@ -171,8 +172,9 @@ def detect_img(src):
 
         return cv_outs
 
-    except:
+    except Exception as e:
         print("Detected Failed...")
+        print(e)
         return None
 
 
@@ -250,8 +252,9 @@ def detected_processing(src,cv_outs):
                     result_list.append(boxes)
                     result_list.append(class_ids)
                     result_list.append(confidences)
-        except:
+        except Exception as e:
             print('=============Idxs processing Failed......')
+            print(e)
         
         # ROI Box draw
         if box_flag==1:
@@ -262,8 +265,9 @@ def detected_processing(src,cv_outs):
         # return draw_img,idxs,boxes,class_ids,confidences
         return result_list
 
-    except:
+    except Exception as e:
         print('Detected Results Prcoessing Failed.')
+        print(e)
         return None
 
 
@@ -343,8 +347,9 @@ def img_redraw(draw_img,result_list):
         del conf_data
         return result, draw_img
 
-    except:
+    except Exception as e:
         print("Drawing Result is Nothing...")
+        print(e)
         return None,None
 
 
@@ -352,12 +357,12 @@ def img_redraw(draw_img,result_list):
 # data save
 def set_json(result,img):
 
+    print('Write Started json file.')
+        
+    # converting to gray (1 channel)
+    #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        
     try:
-        print('Write Started json file.')
-        
-        # converting to gray (1 channel)
-        #img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        
         # Image를 Json 파일에 저장하기 위한 Encoding
         _,buffer=cv2.imencode('.png', img)
         img_text=base64.b64encode(buffer).decode('utf8')
@@ -384,8 +389,9 @@ def set_json(result,img):
     
         return name
 
-    except:
+    except Exception as e:
         print("Json Write Failed...")
+        print(e)
         return None
 
 
@@ -403,8 +409,9 @@ def uuid_trans(name):
     
         return byt2short
 
-    except:
+    except Exception as e:
         print("UUID Trans Failed...")
+        print(e)
         return None
 
 
@@ -425,8 +432,9 @@ def file_delete(num):
         timer=Timer(2,file_delete,[num])
         timer.start()
 
-    except:
+    except Exception as e:
         print("Json File Delete Failed...")
+        print(e)
 
 
 
@@ -453,14 +461,18 @@ def convert_img(img):
     # Crop (x, y, w, h): (900, 0, 2296, 1792)
     src=img[y:y+h,x:x+w]
 
-    # Resize 50%
-    src=cv2.resize(src, dsize=(0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    try:
+        # Resize 50%
+        src=cv2.resize(src, dsize=(0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
 
-    # Convert to grayscale
-    dst = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # for converting to gray
-    dst = cv2.cvtColor(dst, cv2.COLOR_GRAY2BGR)  # for converting to 3 channel (DNN에서 3채널만 사용 가능)
+        # Convert to grayscale
+        dst = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # for converting to gray
+        dst = cv2.cvtColor(dst, cv2.COLOR_GRAY2BGR)  # for converting to 3 channel (DNN에서 3채널만 사용 가능)
 
-    return dst
+        return dst
+    except Exception as e:
+        print('Image Convert Error !')
+        print(e)
 
 
 
