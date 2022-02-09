@@ -16,7 +16,7 @@
 
 - After that, the completed program was registered as a service of ubuntu and started automatically when rebooting and system startup.
 
-- This project was created and used on Ubuntu on Jetson Xavier Tx2. 
+- This project was created and used on Ubuntu on Jetson Xavier Nx2. 
 
 
 
