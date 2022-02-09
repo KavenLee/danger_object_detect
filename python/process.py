@@ -134,6 +134,8 @@ def net_ready():
         
               
         outlayer_names=[layer_names[i[0]-1] for i in cv_net_yolo.getUnconnectedOutLayers()]
+        # failed
+        # try : outlayer_names=[layer_names[i[0]-1] for i in [cv_net_yolo.getUnconnectedOutLayers()]]
         # cv_net_yolo.getUnconnectedOutLayers() : [[200], [227], [254]]
         
 
